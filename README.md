@@ -1,7 +1,7 @@
 # 프로젝트 목적
 
-- keyword를 추출하는 keyword extract 모델 fine-tuning
-- 이 project는 RAG의 성능을 보충하기 위한 방법으로 지식그래프를 선정했으며, 지식그래프에 keyword가 사용되기 때문에 진행
+- keyword extract 모델 fine-tuning
+- 이 project는 RAG의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
 
 # Reference
 
