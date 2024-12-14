@@ -3,6 +3,7 @@
 - keyword extract 모델 fine-tuning
 - 이 project는 관세청 RAG 챗봇의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
 - 적은 GPU로 기능을 수행하기 위해, LLM이 아닌 KoBART로 진행
+- 의도한 모델의 입력과 출력 예시: 이사화물 통관예약을 하면 뭐가 좋나요?(입력) -> 이사화물, 통관, 예약, 장점(출력)
 
 # Reference
 
@@ -108,44 +109,8 @@ project
 ![Cap 2024-04-19 16-52-10-944](https://github.com/user-attachments/assets/28ea04a7-78d6-4c26-a55d-32f9028fa0f8)
 - 다소 장난스러워 보일 수 있으나 학습하지 않은 데이터에 대해 주어, 동사, 목적어를 명사형으로 추출할 수 있는지 demo page에서 테스트
 
-
-# 한계 및 극복방안
-
-- 데이터 부분: 이 project에서는 사람이 직접 데이터를 제작했다. 추후 일반화하기 위해서는 데이터 추출 자동화가 선행돼야 한다.
-- Retrieval 성능: top1의 acc는 30%에 그쳤다. Retrieval 성능을 올리기 위해 BM25같은 sparse retriever와 ensemble retriever 구축이 필요하다. 또한 보조 모델을 활용하는 등 topK가 커져도 gold passage를 추출하는 기능이 필요하다.
-- LLM 성능: Retrieval이 잘못된 정보를 전달할 경우 LLM이 필터링할 수 있어야 한다.
-
-# 앞으로의 방향
-
-![Cap 2024-02-13 16-59-36-937](https://github.com/privateInt/RAG-chatbot/assets/95892797/d6161384-2ccf-4b8b-b644-cf5fe1da77de)
-
-![Cap 2024-02-13 17-00-56-248](https://github.com/privateInt/RAG-chatbot/assets/95892797/1778fc2f-26f0-42b1-a878-fb4e0a2a5fe9)
-
-## 데이터 pipeline
-- 문서에는 자연어와 표, 이미지 등이 섞여있음
-- 표의 경우 MD, HTML 등의 형태로 변경하는 등 LLM 학습 가능한 형태로 1차 가공 필요
-- 1차 가공이 끝난 데이터를 출처,제시문,질문,답변 등으로 구분하는 2차 가공 필요
-
-## advanced RAG
-- Multi-Query: 질문 표현 방식에 따라 retrieval 성능이 바뀌므로 같은 의미지만 다른 표현을 여러개 생성하여 retriever 필요
-- Self-Query: 조건식으로 검색 대상을 최대한 좁힌 후 retriever 시행
-- Time-Weighted: meta data(문서 생성 시기, 문서 종류 등)를 활용해 검색 대상을 최대한 좁힌 후 retriever 시행
-- Ensemble-Retriever: sparse retriever의 성능이 더 좋은 경우가 존재하기 때문에 구축 필요
-- Long Context Reorder: 연관성이 높은 문서를 일부러 맨앞, 맨뒤에 Reorder
-
-![Cap 2024-02-14 12-21-48-066](https://github.com/privateInt/RAG-chatbot/assets/95892797/3214e493-fb28-4af1-a190-8f7e9dac049d)
-
-## graph DB
-- advanced RAG만으로 Retriever 성능이 부족할 수 있음, 추가 retriever system 구축이 필요함
-- graph DB는 노드(키워드)와 엣지(관계)로 이루어짐
-- 관계 정의 가이드라인 필요
-- 키워드 추출 가이드라인 필요
-
-## chain of thought
-- prompt를 단계별로 제공하여 LLM이 문제를 쉽게 이해할 수 있도록 조치 필요
-
-## 더 살펴보고 싶은 논문 및 내용
-- Self-RAG
-- Re-ranker
-- DPO trainer
-- RLHF (RM, PPO)
+# 결론
+- fine-tuning을 진행한 base model은 summarization model로, 키워드를 추출하는 것 또한 요약이라는 가설을 증명할 수 있었음.
+- inference server의 GPU memory usage는 4GB로, 의도했던 것처럼 적은 GPU 자원으로 구동이 가능했음.
+- model의 입출력이 의도한대로 나오는 것을 확인했으며, test.tsv 파일에 대한 inference 진행후 정성평가 결과 95%데이터가 사용가능 했음.
+- 지식그래프를 이용한 Retrieval의 성능은 top1 acc 20%에 그쳤다. 이음동의어가 원인이었으며, 이를 해결하기 위해선 domain 단어 간의 관계 정립이 필요할 것으로 추측된다.
