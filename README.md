@@ -5,8 +5,7 @@
 
 # Reference
 
-- [LLM](https://github.com/nlpai-lab/KULLM)
-- [DPR](https://github.com/TmaxEdu/KorDPR)
+- [KoBART-summarization](https://github.com/seujung/KoBART-summarization)
 
 
 # 기능
