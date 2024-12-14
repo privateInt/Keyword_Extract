@@ -1,13 +1,16 @@
 # 프로젝트 목적
 
 - keyword extract 모델 fine-tuning
-- 이 project는 RAG의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
+- 이 project는 관세청 RAG 챗봇의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
 - 적은 GPU로 기능을 수행하기 위해, LLM이 아닌 KoBART로 진행
 
 # Reference
 
 - [KoBART-summarization](https://github.com/seujung/KoBART-summarization)
 
+# Data
+
+- KorQuad 데이터 셋, 관세청 PoC 사업 데이터 셋의 질문에 chatGPT로 label을 만든 데이터 75,403쌍
 
 # 기능
 
@@ -37,7 +40,7 @@ project
 |dataset.py|"query", "keyword" column을 가지는 tsv파일을 입력 받아 pytorch lightning data module로 반환하는 Dataset을 정의한 파일|
 |model.py|KoBART model을 정의한 파일|
 |train.py|데이터를 사용해 KoBART model을 fine-tuning한다. wandb API KEY 입력시 loss 추적 가능|
-|get_model_binary.py||
+|get_model_binary.py|pytorch-lightning binary --> huggingface binary로 추출|
 |inf_server.py.py|KoBART의 fine-tuning 결과를 이용해 inference server(flask)를 작동|
 |demo.py|inference server에 입력값을 전송하고 return값을 출력하는 데모 페이지(streamlit)작동|
 
