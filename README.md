@@ -92,6 +92,14 @@ project
     <td>pytorch-lightning binary --> huggingface binary로 추출</td>
     <td>python get_model_binary.py --hparams ./logs/tb_logs/default/version_0/hparams.yaml --model_binary ./checkpoint/model_chp/epoch=01-val_loss=0.307.ckpt</td>
   </tr>
+  <tr>
+    <td>fine-tuning 결과를 이용해 inference server(flask)를 작동</td>
+    <td>python inf_server.py</td>
+  </tr>
+  <tr>
+    <td>inference server에 입력값을 전송하고 return값을 출력하는 데모 페이지(streamlit)작동</td>
+    <td>streamlit run demo.py</td>
+  </tr>
   
 </table>
 
