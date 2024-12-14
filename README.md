@@ -2,6 +2,7 @@
 
 - keyword extract 모델 fine-tuning
 - 이 project는 RAG의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
+- 적은 GPU로 기능을 수행하기 위해, KoBART로 진행
 
 # Reference
 
@@ -10,39 +11,18 @@
 
 # 기능
 
-- LLM을 fine-tuning 할 수 있다. huggingface에 있는 LLM이면 학습 가능하다.(default: KULLM_v2_12.8b)
-- DPR을 fine-tuning 할 수 있다. encoder 2개를 사용했으며 모두 klue/bert-base를 tokenizer로 사용한다. bert계열이면 교체 가능하다. (default: klue/bert-base)
+- KoBART를 fine-tuning 할 수 있다. huggingface에 있는 KoBART 계열 모델이면 학습 가능하다.(default: gogamza/kobart-base-v1)
 - user input(질문)입력시 user input에서 추출한 keyword를 response로 return하는 서버(flask)를 띄울 수 있다.
 - user input(질문)을 입력하고 response를 화면에 출력하는 데모 페이지(streamlit)를 띄울 수 있다.
 
 # 파일 구조
 ```sh
 project
-├── app.py
 ├── data
-│   ├── kullm_custom_data_240228_for_retriever_dst.p
-│   ├── kullm_custom_data_240228_for_retriever_src.p
-│   ├── kullm_custom_data_240228.json
-│   ├── kullm_custom_data_240228_passage_index.dpr
-│   ├── kullm_custom_data_240228_passage_index_meta.dpr
-│   ├── kullm_custom_data_240228_test_0.2.p
-│   ├── kullm_custom_data_240228_train_0.8.p
-│   └── kullm_custom_data_240228.xlsx
+│   ├── train.tsv
+│   └── test.tsv
 ├── docker-compose.yml
 ├── Dockerfile
-├── DPR
-│   ├── DPR_data.py
-│   ├── DPR_inference.py
-│   ├── DPR_make_passage_vector.py
-│   ├── DPR_model.py
-│   ├── DPR_test.py
-│   ├── DPR_trainer.py
-├── LLM
-│   ├── LLM_extract_data.py
-│   ├── LLM_prompter.py
-│   ├── LLM_trainer.py
-│   └── templates
-│       └── kullm.json
 ├── requirements.txt
 ├── run.sh
 ├── server.py
