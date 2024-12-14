@@ -106,7 +106,7 @@ project
 # 데모 페이지 예시
 
 ![Cap 2024-04-19 16-52-10-944](https://github.com/user-attachments/assets/28ea04a7-78d6-4c26-a55d-32f9028fa0f8)
-
+- 다소 장난스러워 보일 수 있으나 학습하지 않은 데이터에 대해 주어, 동사, 목적어를 추출할 수 있는지 demo page에서 테스트한 화면
 
 
 # 한계 및 극복방안
