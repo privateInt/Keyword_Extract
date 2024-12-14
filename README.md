@@ -79,42 +79,18 @@ project
     <td>pip install -r requirements.txt</td>
   </tr>
   <tr>
-    <td rowspan="3">DPR 학습</td>
-    <td>cd [YOUR WORKSPACE]</td>
-  </tr>
-    <!-- Cell 2 is merged with the cell above -->
-    <td>cd DPR</td>
-  </tr>
-  <tr>
-    <!-- Cell 2 is merged with the cell above -->
-    <td>python DPR_trainer.py</td>
-  </tr>
-  <tr>
-    <td rowspan="3">LLM 학습</td>
-    <td>cd [YOUR WORKSPACE]</td>
-  </tr>
-    <!-- Cell 2 is merged with the cell above -->
-    <td>cd LLM</td>
+    <td>fine-tuning</td>
+    <td>python train.py --gradient_clip_val 1.0 \
+                --max_epochs 2 \
+                --checkpoint checkpoint \
+                --accelerator gpu \
+                --num_gpus 4 \
+                --batch_size 8 \
+                --num_workers 4</td>
   </tr>
   <tr>
-    <!-- Cell 2 is merged with the cell above -->
-    <td>python LLM_trainer.py</td>
-  </tr>
-  <tr>
-    <td>run server & demo page</td>
-    <td>sh run.sh</td>
-  </tr>
-  <tr>
-    <td rowspan="2">docker image build</td>
-    <td>cd [YOUR WORKSPACE]</td>
-  </tr>
-  <tr>
-    <!-- Cell 2 is merged with the cell above -->
-    <td>docker build -t kullm:ver2 .</td>
-  </tr>
-  <tr>
-    <td>docker container start</td>
-    <td>docker-compose up -d</td>
+    <td>pytorch-lightning binary --> huggingface binary로 추출</td>
+    <td>python get_model_binary.py --hparams ./logs/tb_logs/default/version_0/hparams.yaml --model_binary ./checkpoint/model_chp/epoch=01-val_loss=0.307.ckpt</td>
   </tr>
   
 </table>
