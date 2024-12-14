@@ -105,7 +105,8 @@ project
 
 # 데모 페이지 예시
 
-![Cap 2024-05-25 14-55-04-185](https://github.com/privateInt/RAG-chatbot/assets/95892797/1357398d-5ac2-4492-8f51-adad63d75b20)
+![Cap 2024-04-19 16-52-10-944](https://github.com/user-attachments/assets/28ea04a7-78d6-4c26-a55d-32f9028fa0f8)
+
 
 
 # 한계 및 극복방안
