@@ -21,18 +21,19 @@ project
 ├── data
 │   ├── train.tsv
 │   └── test.tsv
-├── docker-compose.yml
-├── Dockerfile
+├── dataset.py
+├── demo.py
+├── get_model_binary.py
+├── inf_server.py
+├── model.py
 ├── requirements.txt
-├── run.sh
-├── server.py
-└── utils.py
+└── train.py
 ```
 
 # 폴더 및 파일 역할
 | 폴더 및 파일 | 설명 |
 |------|--------|
-|data|fine-tuning 및 RAG 대상 파일을 저장하는 폴더, 현재 xlsx파일을 읽고 처리하는 방식이며, xlsx파일의 column에는 출처,제시문,질문,답변이 포함돼야 한다.
+|data|fine-tuning 데이터 파일을 저장하는 폴더, 현재 tsv파일을 읽고 처리하는 방식이며, tsv파일의 column에는 "query", "keyword"가 포함돼야 한다. train 데이터는 train.tsv, test 데이터는 test.tsv파일을 읽으며 바꾸고 싶은 경우 train.py에서 변경 가능하다.|
 |DPR|DPR 관련 코드 저장|
 |DPR/DPR_data.py|데이터 parsing 및 pytorch dataloader에 load할 수 있게 가공하여 pickle로 저장한다. (train.p, test.p, for_retriever_src.p)|
 |DPR/DPR_model.py|DPR model을 정의한 파일, 모델은 질문(query)과 제시문(passage)를 각각의 encoder로 처리한다.|
@@ -46,11 +47,9 @@ project
 |templates|LLM fine-tuning 및 inference시 사용하는 prompt를 저장하는 폴더|
 |templates/kullm.json|prompt engineering에 대한 정보가 담겨 입력 데이터를 가공하는 json파일|
 |requirements.txt|project 작동시 필요한 library를 모아놓은 txt파일|
-|server.py|DPR, LLM의 fine-tuning 결과를 이용해 inference server(flask)를 작동|
-|app.py|inference server에 입력값을 전송하고 return값을 출력하는 데모 페이지(streamlit)작동|
-|run.sh|inference server와 데모 페이지를 한번에 작동하는 shell script 명령어 파일|
-|Dokcerfile|project 결과를 docker image로 build할 수 있도록 명령어들을 모아놓은 파일|
-|docker-compose.yml|docker image가 build되면 바로 사용할 수 있도록 mount, gpu, 명령어 등을 정의해놓은 yml파일|
+|inf_server.py.py|KoBART의 fine-tuning 결과를 이용해 inference server(flask)를 작동|
+|demo.py|inference server에 입력값을 전송하고 return값을 출력하는 데모 페이지(streamlit)작동|
+
 
 # 환경
 - GPU: A100(40GiB)GPU * 4
