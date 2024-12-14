@@ -2,7 +2,7 @@
 
 - keyword extract 모델 fine-tuning
 - 이 project는 RAG의 성능을 보충하기 위한 방법으로 선정된 지식그래프에 keyword가 사용되기 때문에 진행
-- 적은 GPU로 기능을 수행하기 위해, KoBART로 진행
+- 적은 GPU로 기능을 수행하기 위해, LLM이 아닌 KoBART로 진행
 
 # Reference
 
