@@ -33,27 +33,18 @@ project
 # 폴더 및 파일 역할
 | 폴더 및 파일 | 설명 |
 |------|--------|
-|data|fine-tuning 데이터 파일을 저장하는 폴더, 현재 tsv파일을 읽고 처리하는 방식이며, tsv파일의 column에는 "query", "keyword"가 포함돼야 한다. train 데이터는 train.tsv, test 데이터는 test.tsv파일을 읽으며 바꾸고 싶은 경우 train.py에서 변경 가능하다.|
-|DPR|DPR 관련 코드 저장|
-|DPR/DPR_data.py|데이터 parsing 및 pytorch dataloader에 load할 수 있게 가공하여 pickle로 저장한다. (train.p, test.p, for_retriever_src.p)|
-|DPR/DPR_model.py|DPR model을 정의한 파일, 모델은 질문(query)과 제시문(passage)를 각각의 encoder로 처리한다.|
-|DPR/DPR_trainer.py|데이터를 사용해 DPR model을 fine-tuning한다. tensorboard 및 log 기록 기능을 추가해 loss를 확인할 수 있다. loss는 CE를 사용했다.|
-|DPR/DPR_make_passage_vector|fine-tuned DPR model을 사용해 RAG target data를 vector로 변환해 faiss(vector DB)에 저장한다. (passage_index.dpr, passage_index_meta.dpr, for_retriever_dst.p)|
-|DPR/DPR_test.py|fine-tuned DPR model의 정확도를 확인한다. 계산방법은 질문 입력시 매칭하는 제시문(passage)이 GT와 일치하는지 비교한다. top_k는 1,3의 경우에 대해 각각 진행하였다.|
-|LLM|LLM 관련 코드 저장|
-|LLM/LLM_extract_data.py|data폴더에 저장된 xlsx파일을 fine-tuning 가능하도록 json에 intruction, input, output형태로 저장한다.|
-|LLM/LLM_prompter.py|LLM fine-tuning 및 inference시 입력 데이터를 지정한 prompt형태로 변경한다.|
-|LLM/LLM_trainer.py|LLM을 fine-tuning하여 결과를 bin파일로 저장한다.|
-|templates|LLM fine-tuning 및 inference시 사용하는 prompt를 저장하는 폴더|
-|templates/kullm.json|prompt engineering에 대한 정보가 담겨 입력 데이터를 가공하는 json파일|
-|requirements.txt|project 작동시 필요한 library를 모아놓은 txt파일|
+|data|fine-tuning 데이터 파일을 저장하는 폴더, 현재 tsv파일을 읽고 처리하는 방식이며, tsv파일의 column에는 "query", "keyword"가 포함돼야 한다. train 데이터는 train.tsv, test 데이터는 test.tsv파일을 읽으며 파일 이름을 바꾸고 싶은 경우 train.py에서 변경 가능|
+|dataset.py|"query", "keyword" column을 가지는 tsv파일을 입력 받아 pytorch lightning data module로 반환하는 Dataset을 정의한 파일|
+|model.py|KoBART model을 정의한 파일|
+|train.py|데이터를 사용해 KoBART model을 fine-tuning한다. wandb API KEY 입력시 loss 추적 가능|
+|get_model_binary.py||
 |inf_server.py.py|KoBART의 fine-tuning 결과를 이용해 inference server(flask)를 작동|
 |demo.py|inference server에 입력값을 전송하고 return값을 출력하는 데모 페이지(streamlit)작동|
 
 
 # 환경
 - GPU: A100(40GiB)GPU * 4
-- 저장 모델 용량: DPR 2.5GB, LLM 9.5GB
+- 저장 모델 용량: 1GB
 - python 3.8
 - CUDA Version 12.0
 - Nvidia Driver Version 525.105.17
