@@ -113,4 +113,4 @@ project
 - fine-tuning을 진행한 base model은 summarization model로, 키워드를 추출하는 것 또한 요약이라는 가설을 증명할 수 있었음.
 - inference server의 GPU memory usage는 4GB로, 의도했던 것처럼 적은 GPU 자원으로 구동이 가능했음.
 - model의 입출력이 의도한대로 나오는 것을 확인했으며, test.tsv 파일에 대한 inference 진행후 정성평가 결과 95%데이터가 사용가능 했음.
-- 지식그래프를 이용한 Retrieval의 성능은 top1 acc 20%에 그쳤다. 이음동의어가 원인이었으며, 이를 해결하기 위해선 domain 단어 간의 관계 정립이 필요할 것으로 추측된다.
+- 지식그래프를 이용한 Retrieval의 성능은 top1 acc 20%에 그쳤음. 이음동의어가 원인이었으며, 이를 해결하기 위해선 domain 단어 간의 관계 정립이 필요할 것으로 추측됨.
